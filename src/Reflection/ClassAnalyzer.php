@@ -37,6 +37,20 @@ class ClassAnalyzer
     }
 
     /**
+     * Return TRUE if the given object use the givent interface, FALSE if not
+     * @param ReflectionClass $class
+     * @param string $interfaceName
+     */
+    public function hasInterface(\ReflectionClass $class, string $interfaceName )
+    {
+        if (in_array($interfaceName, $class->getInterfaceNames())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Return TRUE if the given object has the given method, FALSE if not
      * @param ReflectionClass $class
      * @param string $methodName

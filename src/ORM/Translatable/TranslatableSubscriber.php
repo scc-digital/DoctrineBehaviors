@@ -11,6 +11,8 @@
 
 namespace Knp\DoctrineBehaviors\ORM\Translatable;
 
+use Knp\DoctrineBehaviors\Model\Translatable\TranslatableInterface;
+use Knp\DoctrineBehaviors\Model\Translatable\TranslationInterface;
 use Knp\DoctrineBehaviors\Reflection\ClassAnalyzer;
 
 use Knp\DoctrineBehaviors\ORM\AbstractSubscriber;
@@ -285,7 +287,8 @@ class TranslatableSubscriber extends AbstractSubscriber
      */
     private function isTranslatable(ClassMetadata $classMetadata)
     {
-        return $this->getClassAnalyzer()->hasTrait($classMetadata->reflClass, $this->translatableTrait);
+        return  $this->getClassAnalyzer()->hasInterface($classMetadata->reflClass, TranslatableInterface::class)
+            || $this->getClassAnalyzer()->hasTrait($classMetadata->reflClass, $this->translatableTrait);
     }
 
     /**
@@ -297,7 +300,8 @@ class TranslatableSubscriber extends AbstractSubscriber
      */
     private function isTranslation(ClassMetadata $classMetadata)
     {
-        return $this->getClassAnalyzer()->hasTrait($classMetadata->reflClass, $this->translationTrait);
+        return  $this->getClassAnalyzer()->hasInterface($classMetadata->reflClass, TranslationInterface::class)
+            || $this->getClassAnalyzer()->hasTrait($classMetadata->reflClass, $this->translationTrait);
     }
 
     public function postLoad(LifecycleEventArgs $eventArgs)
