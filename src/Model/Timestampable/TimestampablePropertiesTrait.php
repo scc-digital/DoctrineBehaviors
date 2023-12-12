@@ -4,17 +4,14 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Model\Timestampable;
 
+use Doctrine\ORM\Mapping as ORM;
 use DateTimeInterface;
 
 trait TimestampablePropertiesTrait
 {
-    /**
-     * @var DateTimeInterface
-     */
-    protected $createdAt;
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    protected DateTimeInterface $createdAt;
 
-    /**
-     * @var DateTimeInterface
-     */
-    protected $updatedAt;
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    protected DateTimeInterface $updatedAt;
 }
